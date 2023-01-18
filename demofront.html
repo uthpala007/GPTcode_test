@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tone Generator</title>
+</head>
+<body>
+    <form>
+        <label for="frequency">Frequency:</label>
+        <input type="text" id="frequency" name="frequency">
+        <br>
+        <button id="play" style="background-color: green">Play</button>
+        <button id="stop" style="background-color: red">Stop</button>
+    </form>
+</body>
+<script>
+    // Get references to the buttons
+    var playBtn = document.getElementById("play");
+    var stopBtn = document.getElementById("stop");
+
+    // Add click event listeners to the buttons
+    playBtn.addEventListener("click", playTone);
+    stopBtn.addEventListener("click", stopTone);
+
+    function playTone() {
+        // Get the value of the frequency text box
+        var frequency = document.getElementById("frequency").value;
+        if (frequency) {
+            // Call the Python function to play the tone
+            // Here you need to use some library or package to call the python function from javascript
+            // like python-shell or other
+            // For example python-shell:
+            var PythonShell = require('python-shell');
+            var options = {
+                args: [frequency]
+            };
+            PythonShell.run('play_tone.py', options, function (err, results) {
+              if (err) throw err;
+              console.log('results: %j', results);
+            });
+        }
+    }
+
+    function stopTone() {
+        // Call the Python function to stop the tone
+        // Here you need to use some library or package to call the python function from javascript
+        // like python-shell or other
+        // For example python-shell:
+        var PythonShell = require('python-shell');
+        PythonShell.run('stop_tone.py', function (err, results) {
+          if (err) throw err;
+          console.log('results: %j', results);
+        });
+    }
+</script>
+
+
+</html>
